@@ -8,7 +8,7 @@ class Api::V1::SessionsController < Devise::SessionsController
     def create
         if @user.valid_password?(sign_in_params[:password])
             sign_in "user", @user
-            json_response "Sign in successfully", true, { user: @user }, :ok
+            json_response "Sign in successfully", true, { user: @user, dogs: @user.dogs }, :ok
         else
             json_response "Unauthorized", false, { }, :unauthorized
 
@@ -20,20 +20,6 @@ class Api::V1::SessionsController < Devise::SessionsController
         sign_out @user
         @user.generate_new_authentication_token
         json_response "Log out Successfully", true, {}, :ok
-    end
-
-    def get_user
-        @user = User.find_by authentication_token: request.headers["AUTH-TOKEN"]
-        if @user
-            json_response "success", true, 
-            { 
-                user: @user,
-                dogs: @user.dogs 
-            }, 
-            :ok
-        else
-            json_response "Invalid token", false, {}, :not_found
-        end
     end
 
     private 
