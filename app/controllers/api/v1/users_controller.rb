@@ -16,10 +16,13 @@ class Api::V1::UsersController < ApplicationController
 
     def add_dog_to_user
         @user = User.find_by authentication_token: request.headers["AUTH-TOKEN"]
-        @dog = params[:dog]
+        @dog = Dog.find_by id:params[:dog_id]
 
-        unless @user.dogs.contains? dog
-            user.dogs << params[dog]
+        unless @user.dogs.include? @dog
+            @user.dogs << @dog
+            json_response "Dog added to user!", true, {}, :ok
+        else
+            json_response "Dog already belongs to user", true, {}, :ok 
         end
     end
 end

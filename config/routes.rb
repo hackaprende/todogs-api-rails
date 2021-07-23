@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
       resources :dogs, only: [:index] 
       get "get_user", to: "users#get_user"
+      post "add_dog_to_user", to: "users#add_dog_to_user"
     end
   end
 end
