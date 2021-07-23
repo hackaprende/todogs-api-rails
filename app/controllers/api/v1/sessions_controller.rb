@@ -22,6 +22,20 @@ class Api::V1::SessionsController < Devise::SessionsController
         json_response "Log out Successfully", true, {}, :ok
     end
 
+    def get_user
+        @user = User.find_by authentication_token: request.headers["AUTH-TOKEN"]
+        if @user
+            json_response "success", true, 
+            { 
+                user: @user,
+                dogs: @user.dogs 
+            }, 
+            :ok
+        else
+            json_response "Invalid token", false, {}, :not_found
+        end
+    end
+
     private 
     def sign_in_params
         params.require(:sign_in).permit(:email, :password)
