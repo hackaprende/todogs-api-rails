@@ -25,4 +25,17 @@ class Api::V1::UsersController < ApplicationController
             json_response "Dog already belongs to user", true, {}, :ok 
         end
     end
+
+    def remove_dog_for_user
+        @user = User.find_by authentication_token: request.headers["AUTH-TOKEN"]
+        @dog = Dog.find_by id:params[:dog_id]
+
+        if @user.dogs.include? @dog
+            @user.dogs.delete @dog
+            json_response "Dog removed for user", true, {}, :ok
+        else
+            json_response "User has not that dog", true, {}, :ok 
+        end
+
+    end
 end
