@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  height_female: MyString
+  height_male: MyString
+  image_url: MyString
+  index: 1
+  life_expectancy: MyString
+  name_en: MyString
+  name_es: MyString
+  temperament: MyString
+  temperament_en: MyString
+  weight_female: MyString
+  weight_male: MyString
+  user: one
+
+two:
+  type: 
+  height_female: MyString
+  height_male: MyString
+  image_url: MyString
+  index: 1
+  life_expectancy: MyString
+  name_en: MyString
+  name_es: MyString
+  temperament: MyString
+  temperament_en: MyString
+  weight_female: MyString
+  weight_male: MyString
+  user: two
