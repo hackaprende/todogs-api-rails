@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2021_07_23_180526) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "dogs", force: :cascade do |t|
     t.string "dog_type"
     t.string "height_female"
@@ -30,8 +33,8 @@ ActiveRecord::Schema.define(version: 2021_07_23_180526) do
   end
 
   create_table "dogs_users", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "dog_id"
+    t.bigint "user_id"
+    t.bigint "dog_id"
     t.index ["dog_id"], name: "index_dogs_users_on_dog_id"
     t.index ["user_id"], name: "index_dogs_users_on_user_id"
   end
@@ -51,8 +54,8 @@ ActiveRecord::Schema.define(version: 2021_07_23_180526) do
   end
 
   create_table "users_dogs", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "dog_id"
+    t.bigint "user_id"
+    t.bigint "dog_id"
     t.index ["dog_id"], name: "index_users_dogs_on_dog_id"
     t.index ["user_id"], name: "index_users_dogs_on_user_id"
   end
