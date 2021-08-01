@@ -9,7 +9,8 @@ Rails.application.routes.draw do
         delete "log_out", to: "sessions#destroy"
       end
 
-      resources :dogs, only: [:index] 
+      resources :dogs
+      post "create_dog", to: "dogs#create"
       get "get_user", to: "users#get_user"
       post "add_dog_to_user", to: "users#add_dog_to_user"
       post "remove_dog_for_user", to: "users#remove_dog_for_user"
