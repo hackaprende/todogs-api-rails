@@ -10,7 +10,7 @@ class Api::V1::SessionsController < Devise::SessionsController
             sign_in "user", @user
             json_response "Sign in successfully", true, { user: @user, dogs: @user.dogs }, :ok
         else
-            json_response "Unauthorized", false, { }, :unauthorized
+            json_response "unauthorized", false, { }, :unauthorized
 
         end
     end
@@ -24,7 +24,9 @@ class Api::V1::SessionsController < Devise::SessionsController
 
     private 
     def sign_in_params
-        params.require(:sign_in).permit(:email, :password)
+        params.require(:email)
+        params.require(:password)
+        params.permit(:email, :password)
     end
 
     def load_user
@@ -33,7 +35,7 @@ class Api::V1::SessionsController < Devise::SessionsController
         if @user
             return @user
         else
-            json_response "Cannot get user", false, {}, :not_found
+            json_response "user_not_found", false, {}, :not_found
         end
     end
 
@@ -42,7 +44,7 @@ class Api::V1::SessionsController < Devise::SessionsController
         if @user
             return @user
         else
-            json_response "Invalid token", false, {}, :not_found
+            json_response "invalid_token", false, {}, :not_found
         end
     end
 end
