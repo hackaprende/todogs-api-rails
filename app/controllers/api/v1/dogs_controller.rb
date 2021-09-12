@@ -25,6 +25,13 @@ class Api::V1::DogsController < ApplicationController
         end
     end
 
+    def destroy
+        @dog = Dog.find(params[:id])
+        @dog.destroy
+
+        json_response "Dog removed!", true, {}, :ok
+    end
+
     private
     def dog_params
       params.require(:dog).permit(:dog_type, :height_female, :height_male, :image_url, :index, 
