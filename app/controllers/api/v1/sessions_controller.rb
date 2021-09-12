@@ -30,12 +30,12 @@ class Api::V1::SessionsController < Devise::SessionsController
     end
 
     def load_user
-        @user = User.find_for_database_authentication(email: sign_in_params[:email])
+        @user = User.find_for_database_authentication(email: sign_in_params[:email]) 
 
         if @user
             return @user
         else
-            json_response "user_not_found", false, {}, :not_found
+            json_response "user_not_found", false, {}, :ok
         end
     end
 
@@ -44,7 +44,7 @@ class Api::V1::SessionsController < Devise::SessionsController
         if @user
             return @user
         else
-            json_response "invalid_token", false, {}, :not_found
+            json_response "invalid_token", false, {}, :ok
         end
     end
 end
