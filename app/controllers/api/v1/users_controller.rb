@@ -18,6 +18,11 @@ class Api::V1::UsersController < ApplicationController
         @user = User.find_by authentication_token: request.headers["AUTH-TOKEN"]
         @dog = Dog.find_by id:params[:dog_id]
 
+        if @user == nil
+            json_response "user_not_found", false, {}, :ok
+            return
+        end
+
         unless @user.dogs.include? @dog
             @user.dogs << @dog
             json_response "Dog added to user!", true, {}, :ok
@@ -29,6 +34,11 @@ class Api::V1::UsersController < ApplicationController
     def remove_dog_for_user
         @user = User.find_by authentication_token: request.headers["AUTH-TOKEN"]
         @dog = Dog.find_by id:params[:dog_id]
+
+        if @user == nil
+            json_response "user_not_found", false, {}, :ok
+            return
+        end
 
         if @user.dogs.include? @dog
             @user.dogs.delete @dog
