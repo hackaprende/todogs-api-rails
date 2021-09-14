@@ -14,6 +14,19 @@ class Api::V1::UsersController < ApplicationController
         end
     end
 
+    def get_user_dogs
+        @user = User.find_by authentication_token: request.headers["AUTH-TOKEN"]
+        if @user
+            json_response "success", true, 
+            {
+                dogs: @user.dogs 
+            }, 
+            :ok
+        else
+            json_response "Invalid token", false, {}, :not_found
+        end
+    end
+
     def add_dog_to_user
         @user = User.find_by authentication_token: request.headers["AUTH-TOKEN"]
         @dog = Dog.find_by id:params[:dog_id]
