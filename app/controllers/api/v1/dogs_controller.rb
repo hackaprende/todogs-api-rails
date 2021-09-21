@@ -5,14 +5,14 @@ class Api::V1::DogsController < ApplicationController
         json_response "success", true, { dogs: @dogs }, :ok
     end
 
-    def get
+    def show
         @dog = Dog.find(params[:id])
 
         if @dog
             json_response "Dog found", true, { dog: @dog }, :ok
         else 
             json_response "dog_not_found", false, {}, :ok
-
+        end
     end
 
     def create
