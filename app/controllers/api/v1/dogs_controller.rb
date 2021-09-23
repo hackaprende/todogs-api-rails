@@ -5,6 +5,16 @@ class Api::V1::DogsController < ApplicationController
         json_response "success", true, { dogs: @dogs }, :ok
     end
 
+    def get_dog_by_ml_id
+        @dog = Dog.find_by ml_id: params[:ml_id]
+
+        if @dog
+            json_response "Dog found", true, { dog: @dog }, :ok
+        else 
+            json_response "dog_not_found", false, {}, :ok
+        end
+    end
+
     def show
         @dog = Dog.find(params[:id])
 

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       post "add_dog_to_user", to: "users#add_dog_to_user"
       post "remove_dog_for_user", to: "users#remove_dog_for_user"
       get "get_user_dogs", to: "users#get_user_dogs"
+      get "find_dog_by_ml_id", to: "dogs#get_dog_by_ml_id"
     end
   end
 end
